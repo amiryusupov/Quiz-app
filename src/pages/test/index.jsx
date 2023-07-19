@@ -1,3 +1,4 @@
+import Radio from '@/components/Form/Radio'
 import Page from '@/components/layout'
 import { testUrl } from '@/helpers/urls'
 import useFetch from '@/hooks/useFetch'
@@ -21,7 +22,7 @@ function Test() {
   return (
     <Page>
       {
-        loading ? <h1>Loading...</h1> : <div><h1>{tests[0]?.question}</h1></div>
+        loading ? <h1>Loading...</h1> : <div className="w-full h-full flex items-center justify-center"><Radio question={data.results[0].question} data={data.results[0]}/></div>
       }
     </Page>
   )
