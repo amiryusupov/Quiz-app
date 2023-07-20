@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 export default function Home() {
   const router = useRouter()
   const state = useSelector((state) => state)
-  console.log(state);
-  console.log(state);
   const handleBtnClick = () => {
     router.push({ pathname: "/test", query: { ...router.query } })
   }

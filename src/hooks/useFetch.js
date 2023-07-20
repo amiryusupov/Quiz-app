@@ -6,7 +6,8 @@ function useFetch(url, options = {}, dep = []) {
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     if (url !== null) {
-      axios(url, { params: options })
+      setLoading(true)
+      axios.get(url, { params: options })
         .then(response => response.data)
         .then(json => {
           setData(json)
