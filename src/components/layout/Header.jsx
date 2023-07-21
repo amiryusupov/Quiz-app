@@ -6,7 +6,7 @@ import { categoriesUrl } from '@/helpers/urls'
 function Header() {
   const { data, loading } = useFetch(categoriesUrl)
   const categories = useMemo(() => {
-    return data === null ? [] : data.trivia_categories.map((item) => ({ label: item.name, value: item.id }))
+    return data === null ? [] : data?.trivia_categories?.map((item) => ({ label: item.name, value: item.id }))
   }, [data])
 const difficultyOptions = [
   {

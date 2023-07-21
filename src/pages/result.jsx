@@ -1,10 +1,12 @@
+import Page from '@/components/layout'
 import React from 'react'
 
 function result() {
   return (
-    <div>
-     Result      
-    </div>
+    <Page>
+      <h1>Result</h1>
+    </Page>
+    
   )
 }
 
