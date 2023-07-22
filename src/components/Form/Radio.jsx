@@ -3,7 +3,7 @@ import React from 'react'
 function Radio({ data, question }) {
 
   return (
-    <div className="flex flex-col items-center h-full justify-between pt-[20px] pb-[50px]">
+    <div className="flex flex-col items-center min-h-[14vw] justify-between pt-[20px] pb-[50px]">
       <span className='text-center text-lg px-5 mb-5' dangerouslySetInnerHTML={{ __html: question }}></span>
       <div className="flex flex-col items-start">
         {data.map((item, key) => (
