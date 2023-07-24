@@ -48,9 +48,9 @@ function Test() {
         <div className="flex items-center w-full h-full justify-center">
           <div className="flex flex-col items-center justify-between border w-[30%] h-[40%] shadow-lg rounded">
             <div className="w-full  text-center bg-sky-500 text-xl py-3 text-white">Question #{count + 1}</div>
-            <div className="flex flex-col items-center min-h-[14vw] justify-between pt-[20px] pb-[50px]">
+            <div className="w-full flex flex-col items-center min-h-[20vw] justify-between pt-[20px]">
               <span className='text-center text-lg px-5 mb-5' dangerouslySetInnerHTML={{ __html: quizList[count]?.question }}></span>
-              <form className="w-full" onSubmit={handleSubmit}>
+              <form className="w-full flex flex-col items-center" onSubmit={handleSubmit}>
                 <Radio
                   data={answers}
                 />
