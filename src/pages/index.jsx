@@ -1,13 +1,29 @@
 import Page from "@/components/layout";
+import { fetcher, generateUrl } from "@/helpers/helpers";
+import { setLoading, setQuizList } from "@/redux/slices/QuizSlice";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import useSWR from "swr"
 
 export default function Home() {
+  const dispatch = useDispatch()
   const router = useRouter()
-  const state = useSelector((state) => state)
+  const [settings, setSettings] = useState({});
+  const { data, isLoading } = useSWR('https://opentdb.com/api.php' + generateUrl({ ...settings, amount: 10 }), fetcher)
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const localData = localStorage.getItem("settings");
+      setSettings(JSON.parse(localData));
+    }
+  }, []);
   const handleBtnClick = () => {
     router.push({ pathname: "/test", query: { ...router.query } })
-  }
+  } 
+  useEffect(() => {
+    dispatch(setQuizList(data?.results))
+    dispatch(setLoading(isLoading))
+  }, [data])
   return (
     <Page>
       <div className="container">
