@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   loading: false,
   quizList: [],
-  answers: []
+  answers: [],
+  quizLength: 9 
 }
 const QuizSlice = createSlice({
   name: "quiz",

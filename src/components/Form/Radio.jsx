@@ -6,7 +6,7 @@ function Radio({ data }) {
     // console.log(value);
   }
   return (
-      <div className="flex flex-col items-start pb-[8%]">
+      <div className="flex flex-col items-start pb-[3%]">
         {data.map((item, key) => (
           <div className="flex items-center mb-2" key={key}>
             <input className="accent-sky-500 border-s-transparent" type="radio" value={item} onChange={handleInputChange} name="answer" id={"answer" + key} />
