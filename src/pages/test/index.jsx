@@ -8,40 +8,29 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Test() {
   const router = useRouter();
-
   let [count, setCount] = useState(0);
-
   const dispatch = useDispatch()
-
   const { quizList, loading, answers: newAnswers, quizLength } = useSelector((state) => state.quiz)
-
+  console.log(quizList);
   const answers = shuffleArr([...quizList[count]?.incorrect_answers, quizList[count].correct_answer])
-
   const handleSubmit = (e) => {
-
     e.preventDefault()
     let answer = {
       id: count
     }
-
     for (let i = 0; i < answers.length; i++) {
       if (e.target.elements[i].checked) {
         answer.id = e.target.elements[i].value
         e.target.elements[i].checked = false
       }
     }
-
-    dispatch(setAnswers(count))
-    setCount(count + 1)
-
+    dispatch(setAnswers(answer))
     if (count === quizLength) {
       router.push({ pathname: "/result" })
     }
-  }
-
-  console.log(newAnswers);
-  const handleNext = () => {
-    setCount(count + 1)
+    else {
+      setCount(count + 1)
+    }
   }
   const handlePrev = () => {
     if (count > 0) {
