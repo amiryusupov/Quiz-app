@@ -12,7 +12,7 @@ function Result() {
   return (
     <Page>
       <div className="container">
-        <span>Overall. Correct: {overall.True ? overall.True : "0"}/{quizLength+1}</span>
+        <span>Overall: {overall.True ? overall.True : "0"}/{quizLength+1}</span>
         {
           quizList.map((item, index) => (
             <div key={index}>
