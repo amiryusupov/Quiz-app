@@ -2,7 +2,7 @@ import Page from '@/components/layout'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-function result() {
+function Result() {
   const {answers, quizList, quizLength} = useSelector((state) => state.quiz)
   const results = quizList.map((item, index) => (
     item.correct_answer === answers[index].id ? "True" : "False"
@@ -31,4 +31,4 @@ function result() {
   )
 }
 
-export default result
+export default Result
