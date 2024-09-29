@@ -13,7 +13,7 @@ function Result() {
   const handleNavigation = () => {
     router.push({pathname: "/"})
   }
-  console.log(answers);
+  console.log("Answers: " + results);
   return (
     <Page>
       <div className="container">
@@ -26,8 +26,7 @@ function Result() {
           Go home
         </button>
           </div>
-      ) : (
-        
+      ) : (     
         <div>
           <span>Overall: {overall.True ? overall.True : "0"}/{quizLength+1}</span>
         {
@@ -38,7 +37,11 @@ function Result() {
               <br />
               <span>Your answer: {answers[index].id}</span>
               <blockquote></blockquote>
-              <span>{item.correct_answer === answers[index].id ? "True" : `False. Answer: ${item.correct_answer}`}</span>
+              <span>{item.correct_answer === answers[index].id ? "True" : <>
+                  False.<br /> 
+                  Correct answer: {item.correct_answer}
+                </>}
+              </span>
             </div>
           ))}
           </div>

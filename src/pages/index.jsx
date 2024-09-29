@@ -4,27 +4,47 @@ import { setLoading, setQuizList } from "@/redux/slices/QuizSlice";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import useSWR from "swr"
+import useSWR from "swr";
 
 export default function Home() {
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const [settings, setSettings] = useState({});
-  const { data, isLoading } = useSWR('https://opentdb.com/api.php' + generateUrl({ ...settings, amount: 10 }), fetcher)
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [settings, setSettings] = useState(null);
+  const [shouldFetch, setShouldFetch] = useState(false);
+
+  // Fetching data using useSWR
+  const { data, error, isLoading } = useSWR(
+    shouldFetch ? 'https://opentdb.com/api.php' + generateUrl({ ...settings, amount: 10 }) : null,
+    fetcher,
+    { revalidateOnFocus: false, shouldRetryOnError: false } // Additional SWR options
+  );
+
+  // Retrieve settings from localStorage
   useEffect(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
       const localData = localStorage.getItem("settings");
-      setSettings(JSON.parse(localData));
+      if (localData) {
+        setSettings(JSON.parse(localData));
+        setShouldFetch(true); // Start fetching data after settings are loaded
+      }
     }
   }, []);
+
+  // Handle button click
   const handleBtnClick = () => {
-    router.push({ pathname: "/test", query: { ...router.query } })
-  }
-  
+    router.push({ pathname: "/test", query: { ...router.query } });
+  };
+
+  // Update redux store when data is fetched
   useEffect(() => {
-    dispatch(setQuizList(data?.results))
-    dispatch(setLoading(isLoading))
-  }, [data])
+    if (data && data.results) {
+      dispatch(setQuizList(data.results));
+    }
+    dispatch(setLoading(isLoading));
+  }, [data, isLoading, dispatch]);
+
+  console.log("Expected data: ", data, "Error: ", error);
+
   return (
     <Page>
       <div className="container">
@@ -36,5 +56,5 @@ export default function Home() {
         </div>
       </div>
     </Page>
-  )
+  );
 }

@@ -40,8 +40,10 @@ return (
       <div className="flex gap-4">
         <Select options={difficultyOptions} name="difficulty" />
         <Select options={typeData} name="type" />
-        <Select options={categories} name="category" />
       </div>
+    </div>
+    <div className='text-center pb-3 sm:text-end'>
+      <Select options={categories} name="category" />
     </div>
   </div>
 )

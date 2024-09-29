@@ -12,7 +12,7 @@ function Test() {
   const dispatch = useDispatch()
   const form = useRef()
   const { quizList, loading, answers: newAnswers, quizLength } = useSelector((state) => state.quiz)
-  console.log(quizList);
+  console.log("QuizList: ", quizList);
   const answers = quizList[count]?.incorrect_answers
   ? shuffleArr([...quizList[count].incorrect_answers, quizList[count].correct_answer])
   : [];
@@ -27,9 +27,9 @@ function Test() {
         e.target.elements[i].checked = false
       }
     }
-    console.log(answer)
-    if(!answer.id) {
-      return alert("Tanlang!")
+    console.log("Answers: ", typeof answer.id)
+    if(typeof answer.id !== "string") {
+      return alert("Tanla axir!")
     }
     dispatch(setAnswers(answer))
     if (count === quizLength) {
@@ -60,7 +60,7 @@ function Test() {
         <h1>Loading...</h1>
       ) : (
         <div className="flex items-center w-full h-full justify-center">
-          <div className="flex flex-col items-center justify-between border w-[30%] h-[40%] shadow-lg rounded">
+          <div className="flex flex-col items-center justify-between border w-[70%] m-h-[55%] shadow-lg rounded">
             <div className="w-full  text-center bg-sky-500 text-xl py-3 text-white">Question #{count + 1}</div>
             <div className="w-full flex flex-col items-center min-h-[15vw] justify-between pt-[20px]">
               <span className='text-center text-lg px-5 mb-5' dangerouslySetInnerHTML={{ __html: quizList[count]?.question }}></span>
