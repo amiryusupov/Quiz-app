@@ -7,12 +7,12 @@ function  useFetch(url, options = {}, dep = []) {
   useEffect(() => {
     if (url !== null) {
       setLoading(true)
-      // axios.get(url, { params: options })
-      //   // .then(response => response.data)
-      //   .then(json => {
-      //     setData(json)
-      //     setLoading(false)
-      //   }).catch((error) => alert(error))
+      axios.get(url, { params: options })
+        .then(response => response.data)
+        .then(json => {
+          setData(json)
+          setLoading(false)
+        }).catch((error) => alert(error))
     }
   }, dep)
   return { data, loading }

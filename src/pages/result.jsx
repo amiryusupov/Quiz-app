@@ -1,18 +1,35 @@
 import Page from '@/components/layout'
+import { Router, useRouter } from 'next/router'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
 function Result() {
+  const router = useRouter()
   const {answers, quizList, quizLength} = useSelector((state) => state.quiz)
   const results = quizList.map((item, index) => (
     item.correct_answer === answers[index].id ? "True" : "False"
   ))
   const overall = results.reduce((count, item) => (count[item] = count[item] + 1 || 1, count), {})
-  console.log(overall);
+  const handleNavigation = () => {
+    router.push({pathname: "/"})
+  }
+  console.log(answers);
   return (
     <Page>
       <div className="container">
-        <span>Overall: {overall.True ? overall.True : "0"}/{quizLength+1}</span>
+      {results.length === 0 ? (
+        <div>
+          <h1>
+          You did not complete the test
+        </h1>
+        <button onClick={handleNavigation}>
+          Go home
+        </button>
+          </div>
+      ) : (
+        
+        <div>
+          <span>Overall: {overall.True ? overall.True : "0"}/{quizLength+1}</span>
         {
           quizList.map((item, index) => (
             <div key={index}>
@@ -23,8 +40,9 @@ function Result() {
               <blockquote></blockquote>
               <span>{item.correct_answer === answers[index].id ? "True" : `False. Answer: ${item.correct_answer}`}</span>
             </div>
-          ))
-        }
+          ))}
+          </div>
+      )}
       </div>
     </Page>
     

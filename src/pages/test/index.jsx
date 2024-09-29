@@ -13,7 +13,9 @@ function Test() {
   const form = useRef()
   const { quizList, loading, answers: newAnswers, quizLength } = useSelector((state) => state.quiz)
   console.log(quizList);
-  const answers = shuffleArr([...quizList[count]?.incorrect_answers, quizList[count].correct_answer])
+  const answers = quizList[count]?.incorrect_answers
+  ? shuffleArr([...quizList[count].incorrect_answers, quizList[count].correct_answer])
+  : [];
   const handleSubmit = (e) => {
     e.preventDefault()
     let answer = {
@@ -25,6 +27,7 @@ function Test() {
         e.target.elements[i].checked = false
       }
     }
+    console.log(answer)
     if(!answer.id) {
       return alert("Tanlang!")
     }

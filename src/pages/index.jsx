@@ -19,7 +19,8 @@ export default function Home() {
   }, []);
   const handleBtnClick = () => {
     router.push({ pathname: "/test", query: { ...router.query } })
-  } 
+  }
+  
   useEffect(() => {
     dispatch(setQuizList(data?.results))
     dispatch(setLoading(isLoading))

@@ -8,6 +8,7 @@ function Header() {
   const categories = useMemo(() => {
     return data === null ? [] : data?.trivia_categories?.map((item) => ({ label: item.name, value: item.id }))
   }, [data])
+  console.log(data?.trivia_categories?.map((item) => ({ label: item.name, value: item.id })))
 const difficultyOptions = [
   {
     label: "Easy",
